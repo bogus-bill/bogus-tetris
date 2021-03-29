@@ -1,25 +1,45 @@
-div {
+.square {
     background-color: rgba(91, 94, 250, 0.13);
-    height: 20px;
-    width: 20px;
+    height: 40px;
+    width: 40px;
 }
 
 .grid {
     background-color: rgba(202, 233, 27, 0.13);
-    height: 400px;
-    width: 200px;
+    height: 800px;
+    width: 400px;
     display: flex;
     flex-wrap: wrap;
-}
-
-.first {
-    color: red;
 }
 
 .drawn {
     background-color: green;
 }
 
+.score {
+    /* background-color: black; */
+    font-size: xx-large;
+    position: fixed;
+    left: 600px;
+}
+
 .frozen {
-    background-color: yellow;
+    background-color: purple;
+    transition: background-color 0.6s;
+}
+
+.free {
+    /* transition: background-color 2s; */
+    background-color: rgba(202, 233, 27, 0.13);
+}
+
+.removing {
+    transition: all 2s ease-out;
+    background-color: rgba(91, 94, 250, 0.13);
+    transition-timing-function: linear;
+    transform: rotate(180deg);
+}
+
+.destroyed {
+    background-color: rgb(255, 0, 0);
 }
