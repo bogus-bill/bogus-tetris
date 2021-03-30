@@ -1,4 +1,4 @@
-const SPEED = 100;
+const SPEED = 250;
 const width = 10;
 const height = 20;
 
@@ -37,8 +37,8 @@ const iTetromino = [
     [width, width + 1, width + 2, width + 3]
 ]
 
-const allTetros = [tTetro];
-// const allTetros = [tTetro, lTetromino, iTetromino, zTetromino, oTetromino];
+// const allTetros = [tTetro];
+const allTetros = [tTetro, lTetromino, iTetromino, zTetromino, oTetromino];
 
 const keyCodeMap = {
     "37": "left",
@@ -55,17 +55,23 @@ function chooseRandomTetro() {
 
 document.addEventListener('DOMContentLoaded', () => {
     multiplyNode(document.querySelector('.square'), width*height, false);
+    multiplyNode(document.querySelector('.squarePreview'), 4*4, false);
+
     document.addEventListener('keyup', control);
 
     let grid = document.querySelector('.grid');
+    let previewGrid = document.querySelector('.preview');
     let squares = Array.from(grid.querySelectorAll('div'));
+    let previewSquares = Array.from(previewGrid.querySelectorAll('div'));
+    let nextRandTetro = chooseRandomTetro();
 
     function initTetro()
     {
         let currentPosition = 15;
         let currentRotation = 0;
         let state = "active";
-        let randTetro = chooseRandomTetro();
+        let randTetro = nextRandTetro;
+        nextRandTetro = chooseRandomTetro();
         let current = randTetro[currentRotation];
 
         return [currentPosition, currentRotation, randTetro, current, state];
@@ -103,6 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let intervalId = window.setInterval(function(){
         undraw();
+        undrawPreview();
         [currentPosition, state] = onMoveDown(currentPosition, current, state, squares);
         if (state === "frozen")
         {
@@ -114,8 +121,25 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         draw();
+        drawPreview();
     }, SPEED);
 
+
+    function drawPreview()
+    {
+        nextRandTetro[0].forEach ( index => {
+            let newIndex = Math.floor(index / width)*4 + index % width;
+            setSquareState(newIndex, "drawn", previewSquares)
+        })
+    }
+
+    function undrawPreview()
+    {
+        nextRandTetro[0].forEach ( index => {
+            let newIndex = Math.floor(index / width)*4 + index % width;
+            setSquareState(newIndex, "free", previewSquares)
+        })
+    }
 
     function draw() {
         current.forEach (index => {

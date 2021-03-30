@@ -16,10 +16,6 @@ function isOnLeftEdge(position, tetromino, width) {
     return minValue <= 0;
 }
 
-function isOnTopEdge(y){
-    return y < 0;
-}
-
 function toHeight(position, width)
 {
     return Math.floor(position / width);

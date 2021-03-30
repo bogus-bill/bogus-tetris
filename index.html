@@ -11,14 +11,17 @@
 </head>
 <body>
     <div class="game">
-        <div class="upper">
-            <div class="grid">
-                <div class="square"></div>
-            </div>
+        <div class="grid">
+            <div class="square"></div>
         </div>
-        <div>
-            <input id="score" class="score" value="0"/>
-            <button id="newGame" value="0">start new game</button>
+        <div class="nonGame">
+            <div class="preview">
+                <div class="squarePreview"></div>
+            </div>
+            <div style="margin-left: auto; margin-right: auto; display: block">
+                Score:<input id="score" class="score" value="10"/></span>
+            </div>
+            <button id="newGame" type="button" class="glow-on-hover">New game</button>
         </div>
     </div>
 </body>
